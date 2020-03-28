@@ -1,26 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useState, useEffect} from "react";
+import {
+  CssBaseline,
+  Container,
+  Box
+} from "@material-ui/core";
+import WrapperBox from "./WrapperBox";
+import Heading from "./Heading";
+import Navigation from "./Navigation";
+import DataDisplay from "./DataDisplay";
+import data from "./data/data.json";
 
-function App() {
+const dataKeys = Object.keys(data);
+
+export default () => {
+  const [activeTopic, setActiveTopic] = useState(dataKeys[0])
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <CssBaseline />
+      <Container>
+        <WrapperBox>
+          <Box p={2}>
+            <Heading
+              heading="Smilecast"
+              tag="Digitally casting a smile on your face"
+            />
+          </Box>
+          <Box pb={2}>
+            <Navigation setActiveTopic={setActiveTopic} />
+          </Box>
+          <Box p={4}>
+            <DataDisplay category={activeTopic} />
+          </Box>
+        </WrapperBox>
+      </Container>
+    </>
   );
-}
-
-export default App;
+};
