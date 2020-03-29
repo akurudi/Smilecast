@@ -2,7 +2,7 @@ const endPoints = {
   dad: "https://icanhazdadjoke.com/",
   geek:
     "https://sv443.net/jokeapi/v2/joke/Programming?blacklistFlags=nsfw,religious,political,racist,sexist&type=single",
-  ron: "http://ron-swanson-quotes.herokuapp.com/v2/quotes",
+  ron: "https://ron-swanson-quotes.herokuapp.com/v2/quotes",
   chuck: "https://api.chucknorris.io/jokes/random",
   cat: "https://api.thecatapi.com/v1/images/search"
 };
