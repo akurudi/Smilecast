@@ -1,52 +1,77 @@
 import React, { useState, useEffect } from "react";
-import {
-  Typography,
-  Button,
-  Grid,
-  Card,
-  CardContent,
-  CardActions
-} from "@material-ui/core";
+import PropTypes from 'prop-types';
+import { Typography, Button, Grid, Box } from "@material-ui/core";
+import ShuffleIcon from "@material-ui/icons/Shuffle";
+import WrapperBox from "./WrapperBox";
+import ImageResult from "./ImageResult";
+import TextResult from "./TextResult";
+import fetchAPI from "./fetchApi";
 
-const fetchData = category => {
-  fetch("/.netlify/functions/getTodos")
-    .then(response => {
-      return response.json();
-    })
-    .then(result => {
-      console.log(result)
-    })
-    .catch(err => {
-      console.log(err);
-    });
+const title = {
+  dad: "Dad Jokes",
+  geek: "Jokes For Geeks",
+  ron: "Ron Swanson Quotes",
+  chuck: "Chuck Norris Facts",
+  cat: "Meeow!"
 };
 
-export default ({ category }) => {
+const DataDisplay = ({ category }) => {
+  const [message, setMessage] = useState("");
+  const [loaded, setLoaded] = useState(false);
+  const fetchData = () => {
+    setLoaded(false);
+    fetchAPI(category)
+      .then(result => {
+        setLoaded(true);
+        setMessage(result);
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  };
   useEffect(() => {
-    fetchData(category);
+    setLoaded(false);
+    fetchAPI(category)
+      .then(result => {
+        setLoaded(true);
+        setMessage(result);
+      })
+      .catch(err => {
+        console.error(err);
+      });
   }, [category]);
   return (
-    <Grid container justify="center" spacing={1} alignItems="center">
-      <Grid item xs={10}>
-        <Card>
-          <CardContent>
-            <Typography
-              variant="body1"
-              align="center"
-              color="textSecondary"
-              gutterBottom
+    <WrapperBox elevation={10}> 
+      <Box p={2}>
+        <Typography variant="h4" align="center" gutterBottom>
+          {title[category]}
+        </Typography>
+        <Grid container alignItems="center" justify="center">
+          <Grid item xs={12}>
+            {category === "cat" ? (
+              <ImageResult imgSrc={message} loaded={loaded} />
+            ) : (
+              <TextResult text={message} loaded={loaded} />
+            )}
+          </Grid>
+          <Grid item xs="auto">
+            <Button
+              variant="outlined"
+              startIcon={<ShuffleIcon />}
+              onClick={fetchData}
+              color="secondary"
             >
-              Chuck Norris can get to the center a Tootsie Pop, in just one
-              lick.
-            </Typography>
-          </CardContent>
-          <CardActions>
-            <Button variant="contained" size="small">
               Random
             </Button>
-          </CardActions>
-        </Card>
-      </Grid>
-    </Grid>
+          </Grid>
+        </Grid>
+      </Box>
+    </WrapperBox>
   );
 };
+
+DataDisplay.propTypes = {
+  category: PropTypes.string.isRequired
+}
+
+export default DataDisplay;
