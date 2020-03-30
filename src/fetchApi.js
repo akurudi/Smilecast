@@ -3,7 +3,7 @@ const endPoints = {
   geek:
     "https://sv443.net/jokeapi/v2/joke/Programming?blacklistFlags=nsfw,religious,political,racist,sexist&type=single",
   ron: "https://ron-swanson-quotes.herokuapp.com/v2/quotes",
-  chuck: "https://api.chucknorris.io/jokes/random",
+  chuck: "https://api.icndb.com/jokes/random?exclude=[explicit]",
   cat: "https://api.thecatapi.com/v1/images/search"
 };
 
@@ -56,7 +56,7 @@ export default category => {
           return response.json();
         })
         .then(result => {
-          return result.value;
+          return result.value.joke;
         })
         .catch(err => {
           return err;
