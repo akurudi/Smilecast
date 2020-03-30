@@ -7,14 +7,14 @@ import "react-lazy-load-image-component/src/effects/blur.css";
 const ImageResult = ({ imgSrc, loaded }) => {
   return (
     <Grid container justify="center">
-      <Box minHeight={400}>
-        <Grid item xs={10}>
+      <Box minHeight={350} maxHeight={330}>
+        <Grid item xs={12}>
           {loaded && (
             <LazyLoadImage
               alt="cat"
               src={imgSrc}
-              height="350px"
               effect="blur"
+              style={{maxWidth: "100%", maxHeight: "330px"}}
             />
           )}
         </Grid>

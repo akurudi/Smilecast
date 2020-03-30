@@ -17,7 +17,7 @@ export default () => {
       <CssBaseline />
       <Container>
         <WrapperBox elevation={0}>
-          <Box p={2}>
+          <Box p={3}>
             <Heading
               heading="Smilecast"
               tag="Digitally casting a smile on your face"

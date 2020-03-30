@@ -9,8 +9,8 @@ const useStyles = makeStyles(theme => ({
   root: {
     backgroundColor: theme.palette.primary.light,
     margin: "3px",
-    padding: "0 5px",
-    lineHeight: "15px",
+    padding: "1px 5px",
+    lineHeight: "13px",
     color: "white",
     "&$selected": {
       backgroundColor: theme.palette.primary.dark,
